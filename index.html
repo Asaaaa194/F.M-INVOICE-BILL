@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>F.M Brothers Invoice</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Lato', sans-serif; background: #f0f2f5; padding: 24px; }
+
+  .inv-card {
+    background: #fff;
+    max-width: 780px;
+    margin: 0 auto;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+  }
+
+  .inv-top-bar { background: #1a2744; height: 8px; }
+
+  .inv-header {
+    padding: 32px 40px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .logo-box { display: flex; align-items: center; gap: 17px; }
+  .logo-name { font-family: 'Playfair Display', serif; font-size: 35px; color: #141414; letter-spacing: 1px; }
+  
+  /* Slogan Updated */
+  .logo-slogan { 
+    font-size: 11px; 
+    color: #373738; 
+    letter-spacing: 2px; 
+    text-transform: uppercase; 
+    margin-top: 5px; 
+    font-weight: 750;
+  }
+
+  /* ✅ DOTS FIX FOR PRINT */
+  .inv-dots { 
+    display: flex; 
+    gap: 8px; 
+    margin-top: 22px; 
+    -webkit-print-color-adjust: exact; 
+    print-color-adjust: exact;
+  }
+  .inv-dot { 
+    width: 8px; 
+    height: 8px; 
+    border-radius: 50%; 
+    background: #e8a820 !important; /* Bold gold color */
+    display: inline-block;
+  }
+
+  .inv-title-big { font-size: 42px; font-weight: 700; color: #1a2744; letter-spacing: 3px; margin-top: 24px; }
+
+  .header-right { 
+  text-align: right;
+  /* Margin-right se ye right side par jayega */
+  margin-right: -20px; 
+  /* Padding-top barhane se ye neeche move ho jayega */
+  padding-top: 40px; 
+}
+
+  .chevron {
+    display: block; width: 0; height: 0;
+    border-left: 28px solid transparent;
+    border-right: 28px solid transparent;
+    border-top: 18px solid #e8a820;
+    margin: 0 0 12px auto;
+    -webkit-print-color-adjust: exact;
+  }
+  .chevron.c2 { opacity: 0.6; margin-top: -12px; }
+  .chevron.c3 { opacity: 0.3; margin-top: -12px; }
+
+  .inv-to { padding: 0 40px 16px; position: relative; }
+  .inv-to p { font-size: 13px; color: #777; margin-bottom: 2px; }
+  
+  .ms-container { display: flex; align-items: center; gap: 10px; position: relative; }
+  .drop-btn { 
+    background: #f8f9fc; border: 1px solid #ddd; cursor: pointer; 
+    font-size: 14px; color: #1a2744; padding: 2px 8px; border-radius: 3px;
+  }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    min-width: 250px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 10;
+    border-radius: 4px;
+    top: 30px;
+    left: 0;
+  }
+  .dropdown-content div { padding: 10px 14px; cursor: pointer; font-size: 13px; border-bottom: 1px solid #eee; }
+  .dropdown-content div:hover { background-color: #f1f1f1; }
+  .show { display: block; }
+
+  .inv-to h2 { font-size: 18px; color: #1a2744; font-weight: 700; text-transform: uppercase; margin-bottom: 4px; }
+  .inv-to .addr { font-size: 13px; color: #666; line-height: 1.8; }
+
+  table.inv-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+  .inv-table thead tr { background: #1a2744; -webkit-print-color-adjust: exact; }
+  .inv-table thead th { color: #fff; font-size: 12px; padding: 12px 16px; text-align: left; text-transform: uppercase; }
+  .inv-table thead th.th-amt { text-align: right; width: 160px; }
+  .inv-table tbody tr { border-bottom: 1px solid #eee; }
+  .inv-table tbody td { padding: 10px 16px; font-size: 14px; color: #333; }
+  .inv-table tbody td.sno { color: #272727; width: 60px; }
+  .inv-table tbody td.desc { font-weight: 700; color: #1a2744; }
+  .inv-table tbody td.amt { text-align: right; font-weight: 700; color: #1a2744; }
+
+  .inv-bottom { padding: 24px 40px 32px; }
+
+  .tot-final {
+    background: #1a2744; border-radius: 3px;
+    display: flex; justify-content: space-between;
+    padding: 12px 14px; margin-top: 8px;
+    -webkit-print-color-adjust: exact;
+  }
+  .tot-final .lbl { color: #fff; font-weight: 700; }
+  .tot-final .val { color: #ffffff; font-weight: 700; }
+
+  .tot-received { display: flex; justify-content: space-between; font-size: 12px; padding: 8px 14px; background: #f8f9fc; border: 1px solid #585858; margin-top: 6px; -webkit-print-color-adjust: exact; }
+
+  .tot-balance {
+    background: #e8a820; border-radius: 3px;
+    display: flex; justify-content: space-between;
+    padding: 10px 14px; margin-top: 6px;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .inv-sign { text-align: left; padding: 60 45px 32px; font-size: 13px; color: #131313; }
+  .inv-sign .sig-line { border-top: 1px solid #aaa; width: 140px; margin-top: 50px; padding-top: 4px; }
+
+  .edit-field { border: none; outline: none; background: transparent; font-family: inherit; width: 100%; }
+  .edit-num { border: none; outline: none; background: transparent; text-align: right; font-weight: 700; width: 130px; font-family: inherit; color: inherit; }
+  .edit-inline { border: none; outline: none; background: transparent; font-weight: 700; font-family: inherit; font-size: 14px; }
+
+  .del-btn { background: none; border: none; color: #ccc; font-size: 14px; cursor: pointer; padding: 0 4px; }
+
+  .btn-row { display: flex; gap: 10px; justify-content: center; margin: 16px auto; max-width: 780px; }
+  .btn-add { background: #1a2744; color: #fff; border: none; padding: 10px 24px; border-radius: 4px; cursor: pointer; }
+  .btn-print { background: #fff; color: #1a2744; border: 1.5px solid #1a2744; padding: 10px 24px; border-radius: 4px; cursor: pointer; }
+
+  @page { size: A4; margin: 0; }
+  @media print {
+    body { background: #fff; padding: 0; }
+    .btn-row, .del-btn, .drop-btn, .dropdown-content { display: none !important; }
+    .inv-card { box-shadow: none; border-radius: 0; width: 100%; height: 99vh; overflow: hidden; }
+  }
+  /* ✅ Sirf number inputs ke sath wale up/down arrows (^) ko hatane ke liye */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/* Firefox ke liye */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+.header-right div {
+  display: flex;
+  justify-content: flex-end;
+  color: #000000 !important;
+  gap: 8px;
+  width: 100%;
+
+}
+@media print {
+  body { 
+    -webkit-print-color-adjust: exact !important; 
+    print-color-adjust: exact !important; 
+    color: #000 !important; /* Pura text jet black ho jayega */
+  }
+  
+  .inv-card { 
+    box-shadow: none !important; 
+    border: 1px solid #eee; /* Print mein border halka sa nazar aaye */
+  }
+
+  /* Table lines ko mazeed dark karne ke liye */
+  .inv-table thead tr { 
+    background-color: #1a2744 !important; 
+  }
+  
+  .inv-table tbody tr { 
+    border-bottom: 1px solid #333 !important; /* Lines dark kar di hain */
+  }
+
+  /* Inputs ka text print mein gayab na ho */
+  input, .edit-field, h2 { 
+    border: none !important; 
+    color: #000 !important; 
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="inv-card">
+  <div class="inv-top-bar"></div>
+
+  <div class="inv-header">
+    <div>
+      <div class="logo-box">
+        <img src="2222.png" alt="Logo" style="height:70px;width:auto;object-fit:contain;">
+        <div>
+          <div class="logo-name">F.M BROTHERS</div>
+          <div class="logo-slogan">Custom Clearing Forwarding &amp; Shipping Agents</div>
+        </div>
+      </div>
+      
+      <div class="inv-dots">
+        <span class="inv-dot"></span><span class="inv-dot"></span><span class="inv-dot"></span><span class="inv-dot"></span>
+        <span class="inv-dot"></span><span class="inv-dot"></span><span class="inv-dot"></span><span class="inv-dot"></span>
+      </div>
+
+      <div class="inv-title-big">INVOICE</div>
+    </div>
+    <div class="header-right">
+      <span class="chevron"></span><span class="chevron c2"></span><span class="chevron c3"></span>
+      <div style="font-size:14px; color:#141414; margin-top:10px;">
+        Bill Ref No: <input type="text" class="edit-inline" value="128/2026" style="width:65px;">
+      </div>
+      <div style="font-size:14px; color:#333; margin-top:5px;">
+        Date: <input type="text" class="edit-inline" value="08-04-2026" style="width:80px;">
+      </div>
+    </div>
+  </div>
+
+  <div class="inv-to">
+    <p>Invoice to:</p>
+    <div class="ms-container">
+      <h2 id="client-name" contenteditable="true">M/S: Beltexco Limited., Karachi</h2>
+      <button class="drop-btn" onclick="toggleDropdown()">⌄</button>
+      <div id="myDropdown" class="dropdown-content">
+        <div onclick="setClient('M/S: Beltexco Limited., Karachi')">M/S: Beltexco Limited., Karachi</div>
+        <div onclick="setClient('M/S: PRIME SAFETY LIMITED')">M/S: PRIME SAFETY LIMITED</div>
+        <div onclick="setClient('M/S: ADAMJEE ENGINEERING (PVT) LIMITED')">M/S: ADAMJEE ENGINEERING (PVT) LIMITED</div>
+      </div>
+    </div>
+    <div class="addr">
+  <div contenteditable="true" class="edit-field" style="font-weight: 700; color: #000000; margin-top: 3px; word-spacing: 4px;">02-Pallets = Polyester DTY Yarn</div>
+  <div contenteditable="true" class="edit-field" style="font-weight: 700; color: #202020; margin-top: 2px; word-spacing: 4px;">
+    Vessel: FUTURE  &nbsp; IGM/EGM: 194049/2026 &nbsp; Dated: 01-04-2026
+  </div>
+  
+  <div contenteditable="true" class="edit-field" style="font-weight: 700; color: #202020; margin-top: 2px; word-spacing: 4px;">Index: 129</div>
+</div>
+
+  <table class="inv-table">
+    <thead>
+      <tr>
+        <th style="width:60px;">S.NO</th>
+        <th>DESCRIPTION</th>
+        <th class="th-amt">AMOUNT (RS:)</th>
+        <th style="width:30px;"></th>
+      </tr>
+    </thead>
+    <tbody id="item-body">
+      <tr>
+        <td class="sno">01</td>
+        <td class="desc"><span contenteditable="true" class="edit-field">Wharfage (AICT)</span></td>
+        <td class="amt"><input type="number" class="edit-num amt-input" value="106847"></td>
+        <td><button class="del-btn" onclick="delRow(this)">✕</button></td>
+      </tr>
+      <tr>
+        <td class="sno">02</td>
+        <td class="desc"><span contenteditable="true" class="edit-field">Seal Charges</span></td>
+        <td class="amt"><input type="number" class="edit-num amt-input" value="300"></td>
+        <td><button class="del-btn" onclick="delRow(this)">✕</button></td>
+      </tr>
+      <tr>
+        <td class="sno">03</td>
+        <td class="desc"><span contenteditable="true" class="edit-field">Weboc Tokens Charges</span></td>
+        <td class="amt"><input type="number" class="edit-num amt-input" value="500"></td>
+        <td><button class="del-btn" onclick="delRow(this)">✕</button></td>
+      </tr>
+      <tr>
+        <td class="sno">04</td>
+        <td class="desc"><span contenteditable="true" class="edit-field">Payment Against PSW GD Fee Charges</span></td>
+        <td class="amt"><input type="number" class="edit-num amt-input" value="750"></td>
+        <td><button class="del-btn" onclick="delRow(this)">✕</button></td>
+      </tr>
+      <tr>
+        <td class="sno">05</td>
+        <td class="desc"><span contenteditable="true" class="edit-field">Double Index Charges</span></td>
+        <td class="amt"><input type="number" class="edit-num amt-input" value="500"></td>
+        <td><button class="del-btn" onclick="delRow(this)">✕</button></td>
+      </tr>
+      <tr>
+        <td class="sno">06</td>
+        <td class="desc"><span contenteditable="true" class="edit-field">Examination/Group/File/Delivery Other All Expenses Charges</span></td>
+        <td class="amt"><input type="number" class="edit-num amt-input" value="5832"></td>
+        <td><button class="del-btn" onclick="delRow(this)">✕</button></td>
+      </tr>
+      <tr>
+        <td class="sno">07</td>
+        <td class="desc"><span contenteditable="true" class="edit-field">Agency Commission Charges</span></td>
+        <td class="amt"><input type="number" class="edit-num amt-input" value="2500"></td>
+        <td><button class="del-btn" onclick="delRow(this)">✕</button></td>
+      </tr>
+      <tr>
+        <td class="sno">08</td>
+        <td class="desc"><span contenteditable="true" class="edit-field">Sales Tax 15%</span></td>
+        <td class="amt"><input type="number" class="edit-num amt-input" value="375"></td>
+        <td><button class="del-btn" onclick="delRow(this)">✕</button></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="inv-bottom">
+    <div class="tot-final">
+      <span class="lbl">TOTAL AMOUNT RS:</span>
+      <span class="val" id="total-amt">Rs. 0.00</span>
+    </div>
+    <div class="tot-received">
+      <span class="lbl" contenteditable="true"style="color:#555;">Received Online Payments (106847) Online Payments:</span>
+      <span> Rs: <input type="number" id="received-input" class="edit-num" style="width:110px; font-size:12px; color:#161616;" value="106847.00"></span>
+    </div>
+    <div class="tot-balance">
+      <span class="lbl">TOTAL BALANCE AMOUNT RS:</span>
+      <span class="val" id="balance-amt">Rs: 0.00</span>
+    </div>
+  </div>
+
+  <div class="inv-sign">
+    <div class="sig-line"> &mdash;For F.M BROTHERS</div>
+  </div>
+</div>
+
+<div class="btn-row">
+  <button class="btn-add" onclick="addRow()">+ Naya Item Add Karein</button>
+  <button class="btn-print" onclick="window.print()">Print / Save PDF</button>
+</div>
+
+<script>
+  function toggleDropdown() { document.getElementById("myDropdown").classList.toggle("show"); }
+  function setClient(name) { document.getElementById("client-name").innerText = name; document.getElementById("myDropdown").classList.remove("show"); }
+  
+  window.onclick = function(event) {
+    if (!event.target.matches('.drop-btn')) {
+      var dropdowns = document.getElementsByClassName("dropdown-content");
+      for (var i = 0; i < dropdowns.length; i++) {
+        if (dropdowns[i].classList.contains('show')) dropdowns[i].classList.remove('show');
+      }
+    }
+  }
+
+  function fmt(n) { return 'Rs. ' + n.toLocaleString('en-PK', { minimumFractionDigits: 2 }); }
+  
+  function recalc() {
+    var total = 0;
+    document.querySelectorAll('.amt-input').forEach(inp => total += parseFloat(inp.value) || 0);
+    document.getElementById('total-amt').textContent = fmt(total);
+    var received = parseFloat(document.getElementById('received-input').value) || 0;
+    document.getElementById('balance-amt').textContent = fmt(total - received);
+    
+    document.querySelectorAll('#item-body tr').forEach((r, i) => {
+      var snoCell = r.querySelector('.sno');
+      if(snoCell) snoCell.textContent = (i + 1 < 10 ? '0' + (i + 1) : (i + 1));
+    });
+  }
+
+  function delRow(btn) { btn.closest('tr').remove(); recalc(); }
+  function addRow() {
+    var tr = document.createElement('tr');
+    tr.innerHTML = '<td class="sno"></td><td class="desc"><span contenteditable="true" class="edit-field">Naya Item</span></td><td class="amt"><input type="number" class="edit-num amt-input" value="0" oninput="recalc()"></td><td><button class="del-btn" onclick="delRow(this)">✕</button></td>';
+    document.getElementById('item-body').appendChild(tr);
+    recalc();
+  }
+
+  document.addEventListener('input', function(e) {
+    if (e.target.classList.contains('amt-input') || e.target.id === 'received-input') recalc();
+  });
+
+  recalc();
+</script>
+</body>
+</html>
