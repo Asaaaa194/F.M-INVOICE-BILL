@@ -30,7 +30,6 @@
   .logo-box { display: flex; align-items: center; gap: 17px; }
   .logo-name { font-family: 'Playfair Display', serif; font-size: 35px; color: #141414; letter-spacing: 1px; }
   
-  /* Slogan Updated */
   .logo-slogan { 
     font-size: 11px; 
     color: #373738; 
@@ -40,7 +39,6 @@
     font-weight: 750;
   }
 
-  /* ✅ DOTS FIX FOR PRINT */
   .inv-dots { 
     display: flex; 
     gap: 8px; 
@@ -52,19 +50,17 @@
     width: 8px; 
     height: 8px; 
     border-radius: 50%; 
-    background: #e8a820 !important; /* Bold gold color */
+    background: #e8a820 !important;
     display: inline-block;
   }
 
   .inv-title-big { font-size: 42px; font-weight: 700; color: #1a2744; letter-spacing: 3px; margin-top: 24px; }
 
   .header-right { 
-  text-align: right;
-  /* Margin-right se ye right side par jayega */
-  margin-right: -20px; 
-  /* Padding-top barhane se ye neeche move ho jayega */
-  padding-top: 40px; 
-}
+    text-align: right;
+    margin-right: -20px; 
+    padding-top: 40px; 
+  }
 
   .chevron {
     display: block; width: 0; height: 0;
@@ -109,17 +105,17 @@
   .inv-table thead th { color: #fff; font-size: 12px; padding: 12px 16px; text-align: left; text-transform: uppercase; }
   .inv-table thead th.th-amt { text-align: right; width: 160px; }
   .inv-table tbody tr { border-bottom: 1px solid #eee; }
-  .inv-table tbody td { padding: 10px 16px; font-size: 14px; color: #333; }
+  .inv-table tbody td { padding: 8px 16px; font-size: 13px; color: #333; }
   .inv-table tbody td.sno { color: #272727; width: 60px; }
   .inv-table tbody td.desc { font-weight: 700; color: #1a2744; }
   .inv-table tbody td.amt { text-align: right; font-weight: 700; color: #1a2744; }
 
-  .inv-bottom { padding: 24px 40px 32px; }
+  .inv-bottom { padding: 16px 40px 12px; }
 
   .tot-final {
     background: #1a2744; border-radius: 3px;
     display: flex; justify-content: space-between;
-    padding: 12px 14px; margin-top: 8px;
+    padding: 10px 14px; margin-top: 6px;
     -webkit-print-color-adjust: exact;
   }
   .tot-final .lbl { color: #fff; font-weight: 700; }
@@ -134,8 +130,9 @@
     -webkit-print-color-adjust: exact;
   }
 
-  .inv-sign { text-align: left; padding: 60 45px 32px; font-size: 13px; color: #131313; }
-  .inv-sign .sig-line { border-top: 1px solid #aaa; width: 140px; margin-top: 50px; padding-top: 4px; }
+  /* ✅ FIXED: SPACE REDUCED HERE */
+  .inv-sign { text-align: left; padding: 15px 40px 20px; font-size: 13px; color: #131313; }
+  .inv-sign .sig-line { border-top: 1px solid #aaa; width: 160px; margin-top: 25px; padding-top: 4px; }
 
   .edit-field { border: none; outline: none; background: transparent; font-family: inherit; width: 100%; }
   .edit-num { border: none; outline: none; background: transparent; text-align: right; font-weight: 700; width: 130px; font-family: inherit; color: inherit; }
@@ -143,66 +140,92 @@
 
   .del-btn { background: none; border: none; color: #ccc; font-size: 14px; cursor: pointer; padding: 0 4px; }
 
-  .btn-row { display: flex; gap: 10px; justify-content: center; margin: 16px auto; max-width: 780px; }
-  .btn-add { background: #1a2744; color: #fff; border: none; padding: 10px 24px; border-radius: 4px; cursor: pointer; }
-  .btn-print { background: #fff; color: #1a2744; border: 1.5px solid #1a2744; padding: 10px 24px; border-radius: 4px; cursor: pointer; }
+  .btn-row { display: flex; gap: 8px; justify-content: center; margin: 16px auto; max-width: 780px; flex-wrap: wrap; }
+  .btn { padding: 9px 15px; border-radius: 4px; cursor: pointer; font-weight: bold; border: none; font-size: 12px; }
+  .btn-add { background: #1a2744; color: #fff; }
+  .btn-space { background: #e8a820; color: #1a2744; }
+  .btn-save { background: #17a2b8; color: #fff; }
+  .btn-print { background: #fff; color: #1a2744; border: 1.5px solid #1a2744; }
+  .btn-clear { background: #6c757d; color: #fff; }
+  .btn-delete { background: #dc3545; color: #fff; }
 
-  @page { size: A4; margin: 0; }
+  .history-bar { margin: 10px auto; max-width: 780px; font-weight: bold; display: flex; justify-content: center; align-items: center; gap: 8px; }
+  .history-bar select { padding: 6px 12px; font-weight: bold; border-radius: 4px; border: 1px solid #1a2744; }
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type=number] {
+    -moz-appearance: textfield;
+  }
+  
+  .header-right div {
+    display: flex;
+    justify-content: flex-end;
+    color: #000000 !important;
+    gap: 8px;
+    width: 100%;
+  }
+
+  /* ✅ PRINT SETTINGS OPTIMIZED FOR A4 SINGLE PAGE */
+  @page { 
+    size: A4 portrait; 
+    margin: 0; 
+  }
+
   @media print {
-    body { background: #fff; padding: 0; }
-    .btn-row, .del-btn, .drop-btn, .dropdown-content { display: none !important; }
-    .inv-card { box-shadow: none; border-radius: 0; width: 100%; height: 99vh; overflow: hidden; }
-  }
-  /* ✅ Sirf number inputs ke sath wale up/down arrows (^) ko hatane ke liye */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-/* Firefox ke liye */
-input[type=number] {
-  -moz-appearance: textfield;
-}
-.header-right div {
-  display: flex;
-  justify-content: flex-end;
-  color: #000000 !important;
-  gap: 8px;
-  width: 100%;
+    body { 
+      -webkit-print-color-adjust: exact !important; 
+      print-color-adjust: exact !important; 
+      color: #000 !important; 
+      background: #fff !important; 
+      padding: 0 !important; 
+      margin: 0 !important;
+    }
+    .btn-row, .history-bar, .del-btn, .drop-btn, .dropdown-content { display: none !important; }
+    
+    .inv-card { 
+      box-shadow: none !important; 
+      border: none !important; 
+      width: 100% !important; 
+      max-width: 100% !important; 
+      height: auto !important; 
+      margin: 0 !important;
+      padding: 0 !important;
+      border-radius: 0 !important;
+    }
 
-}
-@media print {
-  body { 
-    -webkit-print-color-adjust: exact !important; 
-    print-color-adjust: exact !important; 
-    color: #000 !important; /* Pura text jet black ho jayega */
+    .inv-table thead tr { background-color: #1a2744 !important; }
+    .inv-table tbody tr { border-bottom: 1px solid #333 !important; }
+    input, .edit-field, h2 { border: none !important; color: #000 !important; }
+    
+    /* Ensure no multi-page spills */
+    tr, .inv-bottom, .inv-sign {
+      page-break-inside: avoid !important;
+    }
   }
-  
-  .inv-card { 
-    box-shadow: none !important; 
-    border: 1px solid #eee; /* Print mein border halka sa nazar aaye */
-  }
-
-  /* Table lines ko mazeed dark karne ke liye */
-  .inv-table thead tr { 
-    background-color: #1a2744 !important; 
-  }
-  
-  .inv-table tbody tr { 
-    border-bottom: 1px solid #333 !important; /* Lines dark kar di hain */
-  }
-
-  /* Inputs ka text print mein gayab na ho */
-  input, .edit-field, h2 { 
-    border: none !important; 
-    color: #000 !important; 
-  }
-}
 </style>
 </head>
 <body>
 
-<div class="inv-card">
+<div class="btn-row">
+  <button class="btn btn-add" onclick="addRow()">+ Add New Item</button>
+  <button class="btn btn-space" onclick="addSpaceAfterLine()">➕ Space Add Karein</button>
+  <button class="btn btn-save" onclick="saveInvoiceData()">💾 Save Current Invoice</button>
+  <button class="btn btn-print" onclick="window.print()">Print / Save PDF</button>
+  <button class="btn btn-delete" onclick="deleteCurrentInvoice()">🗑️ Delete This Invoice</button>
+</div>
+
+<div class="history-bar">
+  <label for="invoiceHistory">📂 Load Saved Invoices History:</label>
+  <select id="invoiceHistory" onchange="loadSelectedInvoice(this.value)">
+      <option value="">-- Select Saved Bill Ref No --</option>
+  </select>
+</div>
+
+<div class="inv-card" id="capture-area">
   <div class="inv-top-bar"></div>
 
   <div class="inv-header">
@@ -225,10 +248,10 @@ input[type=number] {
     <div class="header-right">
       <span class="chevron"></span><span class="chevron c2"></span><span class="chevron c3"></span>
       <div style="font-size:14px; color:#141414; margin-top:10px;">
-        Bill Ref No: <input type="text" class="edit-inline" value="128/2026" style="width:65px;">
+        Bill Ref No: <input type="text" id="billRefNo" class="edit-inline" value="128/2026" style="width:85px;">
       </div>
       <div style="font-size:14px; color:#333; margin-top:5px;">
-        Date: <input type="text" class="edit-inline" value="08-04-2026" style="width:80px;">
+        Date: <input type="text" class="edit-inline" value="08-04-2026" style="width:85px;">
       </div>
     </div>
   </div>
@@ -245,98 +268,93 @@ input[type=number] {
       </div>
     </div>
     <div class="addr">
-  <div contenteditable="true" class="edit-field" style="font-weight: 700; color: #000000; margin-top: 3px; word-spacing: 4px;">02-Pallets = Polyester DTY Yarn</div>
-  <div contenteditable="true" class="edit-field" style="font-weight: 700; color: #202020; margin-top: 2px; word-spacing: 4px;">
-    Vessel: FUTURE  &nbsp; IGM/EGM: 194049/2026 &nbsp; Dated: 01-04-2026
-  </div>
-  
-  <div contenteditable="true" class="edit-field" style="font-weight: 700; color: #202020; margin-top: 2px; word-spacing: 4px;">Index: 129</div>
-</div>
-
-  <table class="inv-table">
-    <thead>
-      <tr>
-        <th style="width:60px;">S.NO</th>
-        <th>DESCRIPTION</th>
-        <th class="th-amt">AMOUNT (RS:)</th>
-        <th style="width:30px;"></th>
-      </tr>
-    </thead>
-    <tbody id="item-body">
-      <tr>
-        <td class="sno">01</td>
-        <td class="desc"><span contenteditable="true" class="edit-field">Wharfage (AICT)</span></td>
-        <td class="amt"><input type="number" class="edit-num amt-input" value="106847"></td>
-        <td><button class="del-btn" onclick="delRow(this)">✕</button></td>
-      </tr>
-      <tr>
-        <td class="sno">02</td>
-        <td class="desc"><span contenteditable="true" class="edit-field">Seal Charges</span></td>
-        <td class="amt"><input type="number" class="edit-num amt-input" value="300"></td>
-        <td><button class="del-btn" onclick="delRow(this)">✕</button></td>
-      </tr>
-      <tr>
-        <td class="sno">03</td>
-        <td class="desc"><span contenteditable="true" class="edit-field">Weboc Tokens Charges</span></td>
-        <td class="amt"><input type="number" class="edit-num amt-input" value="500"></td>
-        <td><button class="del-btn" onclick="delRow(this)">✕</button></td>
-      </tr>
-      <tr>
-        <td class="sno">04</td>
-        <td class="desc"><span contenteditable="true" class="edit-field">Payment Against PSW GD Fee Charges</span></td>
-        <td class="amt"><input type="number" class="edit-num amt-input" value="750"></td>
-        <td><button class="del-btn" onclick="delRow(this)">✕</button></td>
-      </tr>
-      <tr>
-        <td class="sno">05</td>
-        <td class="desc"><span contenteditable="true" class="edit-field">Double Index Charges</span></td>
-        <td class="amt"><input type="number" class="edit-num amt-input" value="500"></td>
-        <td><button class="del-btn" onclick="delRow(this)">✕</button></td>
-      </tr>
-      <tr>
-        <td class="sno">06</td>
-        <td class="desc"><span contenteditable="true" class="edit-field">Examination/Group/File/Delivery Other All Expenses Charges</span></td>
-        <td class="amt"><input type="number" class="edit-num amt-input" value="5832"></td>
-        <td><button class="del-btn" onclick="delRow(this)">✕</button></td>
-      </tr>
-      <tr>
-        <td class="sno">07</td>
-        <td class="desc"><span contenteditable="true" class="edit-field">Agency Commission Charges</span></td>
-        <td class="amt"><input type="number" class="edit-num amt-input" value="2500"></td>
-        <td><button class="del-btn" onclick="delRow(this)">✕</button></td>
-      </tr>
-      <tr>
-        <td class="sno">08</td>
-        <td class="desc"><span contenteditable="true" class="edit-field">Sales Tax 15%</span></td>
-        <td class="amt"><input type="number" class="edit-num amt-input" value="375"></td>
-        <td><button class="del-btn" onclick="delRow(this)">✕</button></td>
-      </tr>
-    </tbody>
-  </table>
-
-  <div class="inv-bottom">
-    <div class="tot-final">
-      <span class="lbl">TOTAL AMOUNT RS:</span>
-      <span class="val" id="total-amt">Rs. 0.00</span>
+      <div contenteditable="true" class="edit-field" style="font-weight: 700; color: #000000; margin-top: 3px; word-spacing: 4px;">02-Pallets = Polyester DTY Yarn</div>
+      <div contenteditable="true" class="edit-field" style="font-weight: 700; color: #202020; margin-top: 2px; word-spacing: 4px;">
+        VESSEL: FUTURE &nbsp; IGM/EGM: 194049/2026 &nbsp; DATED: 01-04-2026
+      </div>
+      <div contenteditable="true" class="edit-field" style="font-weight: 700; color: #202020; margin-top: 2px; word-spacing: 4px;">INDEX: 129</div>
     </div>
-    <div class="tot-received">
-      <span class="lbl" contenteditable="true"style="color:#555;">Received Online Payments (106847) Online Payments:</span>
-      <span> Rs: <input type="number" id="received-input" class="edit-num" style="width:110px; font-size:12px; color:#161616;" value="106847.00"></span>
+
+    <table class="inv-table">
+      <thead>
+        <tr>
+          <th style="width:60px;">S.NO</th>
+          <th>DESCRIPTION</th>
+          <th class="th-amt">AMOUNT (RS:)</th>
+          <th style="width:30px;"></th>
+        </tr>
+      </thead>
+      <tbody id="item-body">
+        <tr>
+          <td class="sno">01</td>
+          <td class="desc"><span contenteditable="true" class="edit-field">Wharfage (AICT)</span></td>
+          <td class="amt"><input type="number" class="edit-num amt-input" value="106847.00"></td>
+          <td><button class="del-btn" onclick="delRow(this)">✕</button></td>
+        </tr>
+        <tr>
+          <td class="sno">02</td>
+          <td class="desc"><span contenteditable="true" class="edit-field">Seal Charges</span></td>
+          <td class="amt"><input type="number" class="edit-num amt-input" value="300.00"></td>
+          <td><button class="del-btn" onclick="delRow(this)">✕</button></td>
+        </tr>
+        <tr>
+          <td class="sno">03</td>
+          <td class="desc"><span contenteditable="true" class="edit-field">Weboc Tokens Charges</span></td>
+          <td class="amt"><input type="number" class="edit-num amt-input" value="500.00"></td>
+          <td><button class="del-btn" onclick="delRow(this)">✕</button></td>
+        </tr>
+        <tr>
+          <td class="sno">04</td>
+          <td class="desc"><span contenteditable="true" class="edit-field">Payment Against PSW GD Fee Charges</span></td>
+          <td class="amt"><input type="number" class="edit-num amt-input" value="750.00"></td>
+          <td><button class="del-btn" onclick="delRow(this)">✕</button></td>
+        </tr>
+        <tr>
+          <td class="sno">05</td>
+          <td class="desc"><span contenteditable="true" class="edit-field">Double Index Charges</span></td>
+          <td class="amt"><input type="number" class="edit-num amt-input" value="500.00"></td>
+          <td><button class="del-btn" onclick="delRow(this)">✕</button></td>
+        </tr>
+        <tr>
+          <td class="sno">06</td>
+          <td class="desc"><span contenteditable="true" class="edit-field">Examination/Group/File/Delivery Other All Expenses Charges</span></td>
+          <td class="amt"><input type="number" class="edit-num amt-input" value="5832.00"></td>
+          <td><button class="del-btn" onclick="delRow(this)">✕</button></td>
+        </tr>
+        <tr>
+          <td class="sno">07</td>
+          <td class="desc"><span contenteditable="true" class="edit-field">Agency Commission Charges</span></td>
+          <td class="amt"><input type="number" class="edit-num amt-input" value="2500.00"></td>
+          <td><button class="del-btn" onclick="delRow(this)">✕</button></td>
+        </tr>
+        <tr>
+          <td class="sno">08</td>
+          <td class="desc"><span contenteditable="true" class="edit-field">Sales Tax 15%</span></td>
+          <td class="amt"><input type="number" class="edit-num amt-input" value="375.00"></td>
+          <td><button class="del-btn" onclick="delRow(this)">✕</button></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="inv-bottom">
+      <div class="tot-final">
+        <span class="lbl">TOTAL AMOUNT RS:</span>
+        <span class="val" id="total-amt">Rs. 0.00</span>
+      </div>
+      <div class="tot-received">
+        <span class="lbl" contenteditable="true" style="color:#555;">Received Online Payments (106847) Online Payments:</span>
+        <span> Rs: <input type="number" id="received-input" class="edit-num" style="width:110px; font-size:12px; color:#161616;" value="106847"></span>
+      </div>
+      <div class="tot-balance">
+        <span class="lbl">TOTAL BALANCE AMOUNT RS:</span>
+        <span class="val" id="balance-amt">Rs: 0.00</span>
+      </div>
     </div>
-    <div class="tot-balance">
-      <span class="lbl">TOTAL BALANCE AMOUNT RS:</span>
-      <span class="val" id="balance-amt">Rs: 0.00</span>
+
+    <div class="inv-sign">
+      <div class="sig-line">&mdash;For F.M BROTHERS</div>
     </div>
   </div>
-
-  <div class="inv-sign">
-    <div class="sig-line"> &mdash;For F.M BROTHERS</div>
-  </div>
-</div>
-
-<div class="btn-row">
-  <button class="btn-add" onclick="addRow()">+ Naya Item Add Karein</button>
-  <button class="btn-print" onclick="window.print()">Print / Save PDF</button>
 </div>
 
 <script>
@@ -361,13 +379,18 @@ input[type=number] {
     var received = parseFloat(document.getElementById('received-input').value) || 0;
     document.getElementById('balance-amt').textContent = fmt(total - received);
     
-    document.querySelectorAll('#item-body tr').forEach((r, i) => {
+    let counter = 1;
+    document.querySelectorAll('#item-body tr').forEach((r) => {
       var snoCell = r.querySelector('.sno');
-      if(snoCell) snoCell.textContent = (i + 1 < 10 ? '0' + (i + 1) : (i + 1));
+      if(snoCell && !r.classList.contains('blank-space-row')) {
+        snoCell.textContent = (counter < 10 ? '0' + counter : counter);
+        counter++;
+      }
     });
   }
 
   function delRow(btn) { btn.closest('tr').remove(); recalc(); }
+  
   function addRow() {
     var tr = document.createElement('tr');
     tr.innerHTML = '<td class="sno"></td><td class="desc"><span contenteditable="true" class="edit-field">Naya Item</span></td><td class="amt"><input type="number" class="edit-num amt-input" value="0" oninput="recalc()"></td><td><button class="del-btn" onclick="delRow(this)">✕</button></td>';
@@ -375,9 +398,161 @@ input[type=number] {
     recalc();
   }
 
+  /* ✅ FUNCTION: ADD BLANK SPACE ROW AFTER SPECIFIC LINE NUMBER */
+  function addSpaceAfterLine() {
+    var lineNum = prompt("Kis S.No line ke baad space (Khali Box) chahiye? (e.g. 2, 5, 7)");
+    if (!lineNum) return;
+    
+    var targetNum = parseInt(lineNum.trim(), 10);
+    if (isNaN(targetNum)) {
+      alert("Sahi Number likhein!");
+      return;
+    }
+
+    var rows = document.querySelectorAll('#item-body tr');
+    var targetRow = null;
+
+    rows.forEach(r => {
+      var snoCell = r.querySelector('.sno');
+      if (snoCell && parseInt(snoCell.textContent, 10) === targetNum) {
+        targetRow = r;
+      }
+    });
+
+    if (targetRow) {
+      var blankTr = document.createElement('tr');
+      blankTr.className = 'blank-space-row';
+      blankTr.innerHTML = '<td class="sno">&nbsp;</td><td class="desc"><span contenteditable="true" class="edit-field">&nbsp;</span></td><td class="amt"></td><td><button class="del-btn" onclick="delRow(this)">✕</button></td>';
+      targetRow.after(blankTr);
+      recalc();
+    } else {
+      alert("S.No " + targetNum + " wali line nahi mili!");
+    }
+  }
+
   document.addEventListener('input', function(e) {
     if (e.target.classList.contains('amt-input') || e.target.id === 'received-input') recalc();
   });
+
+  // INDEXEDDB DATABASE ENGINE
+  let db;
+  const request = indexedDB.open("FMB_BillRef_Database", 1);
+
+  request.onupgradeneeded = function(e) {
+      db = e.target.result;
+      if (!db.objectStoreNames.contains("invoices")) {
+          db.createObjectStore("invoices", { keyPath: "billRef" });
+      }
+  };
+
+  request.onsuccess = function(e) {
+      db = e.target.result;
+      updateHistoryDropdown();
+      recalc();
+  };
+
+  request.onerror = function(e) {
+      console.error("Database connection failed", e);
+  };
+
+  function saveInvoiceData() {
+      const billRefInput = document.getElementById("billRefNo");
+      const billRefVal = billRefInput ? billRefInput.value.trim() : "";
+      
+      if(!billRefVal) {
+          alert("Pehle Bill Ref No likhein!");
+          return;
+      }
+
+      document.querySelectorAll('#capture-area input').forEach(input => {
+          input.setAttribute('value', input.value);
+      });
+
+      const data = document.getElementById("capture-area").innerHTML;
+      const tx = db.transaction("invoices", "readwrite");
+      const store = tx.objectStore("invoices");
+
+      store.put({ billRef: billRefVal, html: data, updatedAt: new Date() });
+
+      tx.oncomplete = function() {
+          updateHistoryDropdown(billRefVal);
+          alert("Bill Ref No: " + billRefVal + " Safe ho gaya hai!");
+      };
+  }
+
+  function updateHistoryDropdown(activeRef = "") {
+      if(!db) return;
+      const tx = db.transaction("invoices", "readonly");
+      const store = tx.objectStore("invoices");
+      const request = store.getAllKeys();
+
+      request.onsuccess = function() {
+          const select = document.getElementById("invoiceHistory");
+          select.innerHTML = '<option value="">-- Select Saved Bill Ref No --</option>';
+          
+          request.result.forEach(refNo => {
+              let opt = document.createElement('option');
+              opt.value = refNo;
+              opt.innerText = "Bill Ref No: " + refNo;
+              if(refNo === activeRef) opt.selected = true;
+              select.appendChild(opt);
+          });
+      };
+  }
+
+  function loadSelectedInvoice(refNo) {
+      if(!refNo || !db) return;
+      const tx = db.transaction("invoices", "readonly");
+      const store = tx.objectStore("invoices");
+      const request = store.get(refNo);
+
+      request.onsuccess = function() {
+          if(request.result) {
+              document.getElementById("capture-area").innerHTML = request.result.html;
+              recalc();
+          }
+      };
+  }
+
+  function deleteCurrentInvoice() {
+      const billRefInput = document.getElementById("billRefNo");
+      const billRefVal = billRefInput ? billRefInput.value.trim() : "";
+
+      if (!billRefVal) {
+          alert("Koi Bill Ref No nahi mila!");
+          return;
+      }
+
+      if (!db) return;
+      const txCheck = db.transaction("invoices", "readonly");
+      const storeCheck = txCheck.objectStore("invoices");
+      const requestCheck = storeCheck.get(billRefVal);
+
+      requestCheck.onsuccess = function() {
+          if (!requestCheck.result) {
+              alert("Yeh Bill Ref No Database mein Saved nahi hai.");
+              return;
+          }
+
+          if (confirm("Kya aap Bill Ref No " + billRefVal + " ko PERMANENTLY delete karna chahte hain?")) {
+              const txDelete = db.transaction("invoices", "readwrite");
+              const storeDelete = txDelete.objectStore("invoices");
+              storeDelete.delete(billRefVal);
+
+              txDelete.oncomplete = function() {
+                  updateHistoryDropdown("");
+                  alert("Bill Ref No " + billRefVal + " Database se delete ho gaya.");
+              };
+          }
+      };
+  }
+
+  function createNewInvoice() {
+      if(confirm("Nayi Blank Invoice banana chahte hain?")) {
+          document.getElementById("billRefNo").value = "000/2026";
+          recalc();
+      }
+  }
 
   recalc();
 </script>
