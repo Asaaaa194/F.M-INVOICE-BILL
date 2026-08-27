@@ -103,12 +103,14 @@
   table.inv-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
   .inv-table thead tr { background: #1a2744; -webkit-print-color-adjust: exact; }
   .inv-table thead th { color: #fff; font-size: 12px; padding: 12px 16px; text-align: left; text-transform: uppercase; }
-  .inv-table thead th.th-amt { text-align: right; width: 160px; }
-  .inv-table tbody tr { border-bottom: 1px solid #eee; }
-  .inv-table tbody td { padding: 8px 16px; font-size: 13px; color: #333; }
-  .inv-table tbody td.sno { color: #272727; width: 60px; }
+  .inv-table thead th.th-amt { text-align: right; width: 140px; }
+  
+  /* ✅ TABLE ROWS LINES ADDED HERE (Pic 1 & Pic 2 style) */
+  .inv-table tbody tr { border-bottom: 1px solid #b0b0b0; }
+  .inv-table tbody td { padding: 10px 16px; font-size: 13px; color: #333; }
+  .inv-table tbody td.sno { color: #272727; width: 60px; border-right: 1px solid #b0b0b0; }
   .inv-table tbody td.desc { font-weight: 700; color: #1a2744; }
-  .inv-table tbody td.amt { text-align: right; font-weight: 700; color: #1a2744; }
+  .inv-table tbody td.amt { text-align: right; font-weight: 700; color: #1a2744; border-left: 1px solid #b0b0b0; }
 
   .inv-bottom { padding: 16px 40px 12px; }
 
@@ -130,7 +132,6 @@
     -webkit-print-color-adjust: exact;
   }
 
-  /* ✅ FIXED: SPACE REDUCED HERE */
   .inv-sign { text-align: left; padding: 15px 40px 20px; font-size: 13px; color: #131313; }
   .inv-sign .sig-line { border-top: 1px solid #aaa; width: 160px; margin-top: 25px; padding-top: 4px; }
 
@@ -169,7 +170,6 @@
     width: 100%;
   }
 
-  /* ✅ PRINT SETTINGS OPTIMIZED FOR A4 SINGLE PAGE */
   @page { 
     size: A4 portrait; 
     margin: 0; 
@@ -198,10 +198,9 @@
     }
 
     .inv-table thead tr { background-color: #1a2744 !important; }
-    .inv-table tbody tr { border-bottom: 1px solid #333 !important; }
+    .inv-table tbody tr { border-bottom: 1px solid #b0b0b0 !important; }
     input, .edit-field, h2 { border: none !important; color: #000 !important; }
     
-    /* Ensure no multi-page spills */
     tr, .inv-bottom, .inv-sign {
       page-break-inside: avoid !important;
     }
@@ -263,8 +262,21 @@
       <button class="drop-btn" onclick="toggleDropdown()">⌄</button>
       <div id="myDropdown" class="dropdown-content">
         <div onclick="setClient('M/S: Beltexco Limited., Karachi')">M/S: Beltexco Limited., Karachi</div>
-        <div onclick="setClient('M/S: PRIME SAFETY LIMITED')">M/S: PRIME SAFETY LIMITED</div>
-        <div onclick="setClient('M/S: ADAMJEE ENGINEERING (PVT) LIMITED')">M/S: ADAMJEE ENGINEERING (PVT) LIMITED</div>
+<div onclick="setClient('M/S: PRIME SAFETY LIMITED')">M/S: PRIME SAFETY LIMITED</div>
+<div onclick="setClient('M/S: ADAMJEE ENGINEERING (PVT) LIMITED')">M/S: ADAMJEE ENGINEERING (PVT) LIMITED</div>
+<div onclick="setClient('M/S: MERIN (PVT.) LTD')">M/S: MERIN (PVT.) LTD</div>
+<div onclick="setClient('M/S: MERIN ENG SERVICES')">M/S: MERIN ENG SERVICES</div>
+<div onclick="setClient('M/S: OMEGA ENTERPRISES')">M/S: OMEGA ENTERPRISES</div>
+<div onclick="setClient('M/S: PANTHER HOLDINGS PVT LTD')">M/S: PANTHER HOLDINGS PVT LTD</div>
+<div onclick="setClient('M/S: CAPRICORN ENG SERVICES')">M/S: CAPRICORN ENG SERVICES</div>
+<div onclick="setClient('M/S: RIAZ AND SONS')">M/S: RIAZ AND SONS</div>
+<div onclick="setClient('M/S: RIAZ & SONS')">M/S: RIAZ & SONS</div>
+<div onclick="setClient('M/S: HUMAMIA SAFETY PRODUCTS INDUS')">M/S: HUMAMIA SAFETY PRODUCTS INDUS</div>
+<div onclick="setClient('M/S: DEMS (PVT.) LIMITED')">M/S: DEMS (PVT.) LIMITED</div>
+<div onclick="setClient('M/S: KOHLER ELEVATORS PAK PVT LTD')">M/S: KOHLER ELEVATORS PAK PVT LTD</div>
+<div onclick="setClient('M/S: ANTON OILFIELD SERVICE (GROUP) LTD.')">M/S: ANTON OILFIELD SERVICE (GROUP) LTD.</div>
+<div onclick="setClient('M/S: FUJISAN TRADE')">M/S: FUJISAN TRADE</div>
+<div onclick="setClient('M/S: AL HAYYAT TRADERS')">M/S: AL HAYYAT TRADERS</div>
       </div>
     </div>
     <div class="addr">
@@ -398,7 +410,6 @@
     recalc();
   }
 
-  /* ✅ FUNCTION: ADD BLANK SPACE ROW AFTER SPECIFIC LINE NUMBER */
   function addSpaceAfterLine() {
     var lineNum = prompt("Kis S.No line ke baad space (Khali Box) chahiye? (e.g. 2, 5, 7)");
     if (!lineNum) return;
@@ -434,7 +445,6 @@
     if (e.target.classList.contains('amt-input') || e.target.id === 'received-input') recalc();
   });
 
-  // INDEXEDDB DATABASE ENGINE
   let db;
   const request = indexedDB.open("FMB_BillRef_Database", 1);
 
@@ -545,13 +555,6 @@
               };
           }
       };
-  }
-
-  function createNewInvoice() {
-      if(confirm("Nayi Blank Invoice banana chahte hain?")) {
-          document.getElementById("billRefNo").value = "000/2026";
-          recalc();
-      }
   }
 
   recalc();
